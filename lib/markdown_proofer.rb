@@ -41,18 +41,20 @@ class MarkdownProofer
 
       # save the HTML file next to the Markdown one
       output_file = file.sub(/\.md$/, '.html')
-      File.open(output_file, 'w') do |file|
-        file.write(result[:output].to_s)
+      begin
+        File.open(output_file, 'w') do |file|
+          file.write(result[:output].to_s)
+        end
+
+        # do validation on the file
+        html_proofer = HTML::Proofer.new(output_file)
+        output = self.capture_stderr { html_proofer.run }
+        errors = output.split("\n")
+        self.errors.concat(errors)
+      ensure
+        # clean up the file
+        FileUtils.rm(output_file)
       end
-
-      # do validation on the file
-      html_proofer = HTML::Proofer.new(output_file)
-      output = self.capture_stderr { html_proofer.run }
-      errors = output.split("\n")
-      self.errors.concat(errors)
-
-      # clean up the file
-      FileUtils.rm(output_file)
     end
 
     self.errors.empty?
