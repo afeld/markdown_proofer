@@ -9,7 +9,7 @@ describe MarkdownProofer do
     it "handles directories" do
       proofer = MarkdownProofer.new(fixture_path)
       files = proofer.files
-      expect(files.size).to eq(1)
+      expect(files.size).to eq(2)
       expect(files.first).to end_with('/spec/fixtures/broken_link.md')
     end
 
@@ -27,6 +27,16 @@ describe MarkdownProofer do
       proofer.run
       expect(proofer.errors.size).to eq(1)
       expect(proofer.errors.first).to include("External link")
+    end
+
+    it "returns true for no broken links" do
+      proofer = MarkdownProofer.new(fixture_path('working_link.md'))
+      expect(proofer.run).to be_true
+    end
+
+    it "returns false for broken links" do
+      proofer = MarkdownProofer.new(fixture_path)
+      expect(proofer.run).to be_false
     end
 
     it "can be executed multiple times" do

@@ -47,11 +47,13 @@ class MarkdownProofer
       html_proofer = HTML::Proofer.new(output_file)
       output = self.capture_stderr { html_proofer.run }
       errors = output.split("\n")
-      @errors.concat(errors)
+      self.errors.concat(errors)
 
       # clean up the file
       FileUtils.rm(output_file)
     end
+
+    self.errors.empty?
   end
 
 
