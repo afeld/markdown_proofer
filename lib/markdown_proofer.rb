@@ -19,8 +19,12 @@ class MarkdownProofer
   end
 
   def files
-    pattern = File.join(self.path, '**', '*.md')
-    Dir.glob(pattern)
+    if File.file?(self.path)
+      [self.path]
+    else # directory
+      pattern = File.join(self.path, '**', '*.md')
+      Dir.glob(pattern)
+    end
   end
 
   def run
