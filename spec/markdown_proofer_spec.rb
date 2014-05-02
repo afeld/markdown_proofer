@@ -11,6 +11,7 @@ describe MarkdownProofer, vcr: vcr_options do
       files = proofer.files
       expect(files.sort).to eq([
         fixture_path('broken_link.md'),
+        fixture_path('relative_link.md'),
         fixture_path('working_link.md')
       ])
     end
@@ -24,6 +25,11 @@ describe MarkdownProofer, vcr: vcr_options do
   end
 
   describe '#run' do
+    it "works for relative links" do
+      proofer = MarkdownProofer.new(fixture_path('relative_link.md'))
+      expect(proofer.run).to be_true
+    end
+
     it "complains for files with broken links" do
       proofer = MarkdownProofer.new(fixture_path)
       proofer.run
