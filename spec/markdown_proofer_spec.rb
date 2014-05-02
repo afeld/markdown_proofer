@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe MarkdownProofer do
+describe MarkdownProofer, vcr: vcr_options do
   it "has a version number" do
     expect(MarkdownProofer::VERSION).not_to be nil
   end
