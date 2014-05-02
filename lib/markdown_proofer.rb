@@ -9,10 +9,12 @@ require 'html/proofer'
 
 
 class MarkdownProofer
-  attr_reader :path, :errors, :pipeline
+  attr_reader :path, :options, :errors, :pipeline
 
-  def initialize(path)
+  def initialize(path, options={})
     @path = path
+    @options = options.dup
+    self.options[:html_proofer] ||= {}
 
     self.reset_errors
     @pipeline = HTML::Pipeline.new [
@@ -47,7 +49,7 @@ class MarkdownProofer
         end
 
         # do validation on the file
-        html_proofer = HTML::Proofer.new(output_file)
+        html_proofer = HTML::Proofer.new(output_file, self.options[:html_proofer])
         output = self.capture_stderr { html_proofer.run }
         errors = output.split("\n")
         self.errors.concat(errors)
