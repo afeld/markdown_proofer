@@ -18,10 +18,14 @@ class MarkdownProofer
     ], gfm: true
   end
 
+  def files
+    pattern = File.join(self.path, '**', '*.md')
+    Dir.glob(pattern)
+  end
+
   def run
     # iterate over files, and generate HTML from Markdown
-    markdown_files_pattern = File.join(self.path, '**', '*.md')
-    Dir.glob(markdown_files_pattern) do |file|
+    self.files.each do |file|
       # convert the Markdown to HTML
       contents = File.read(file)
       result = self.pipeline.call(contents)

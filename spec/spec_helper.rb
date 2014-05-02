@@ -1,6 +1,6 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'markdown_proofer'
 
-def fixture_path
-  File.join(File.dirname(__FILE__), 'fixtures')
+def fixture_path(file='')
+  File.join(File.dirname(__FILE__), 'fixtures', file)
 end
