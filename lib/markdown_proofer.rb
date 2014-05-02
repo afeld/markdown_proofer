@@ -1,10 +1,12 @@
 require 'rubygems'
-require 'bundler/setup'
+require 'bundler'
+Bundler.require(:default)
 
 require 'markdown_proofer/version'
 require 'find'
 require 'html/pipeline'
 require 'html/proofer'
+
 
 class MarkdownProofer
   attr_reader :path, :errors, :pipeline
