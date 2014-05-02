@@ -22,19 +22,23 @@ class MarkdownProofer
 
     # iterate over files, and generate HTML from Markdown
     Dir.glob(File.join(self.path, '**', '*.md')) do |file|
+      # convert the Markdown to HTML
       contents = File.read(file)
       result = pipeline.call(contents)
 
+      # save the HTML file next to the Markdown one
       output_file = file.sub(/\.md$/, '.html')
       File.open(output_file, 'w') do |file|
         file.write(result[:output].to_s)
       end
 
+      # do validation on the file
       html_proofer = HTML::Proofer.new(output_file)
       output = self.capture_stderr { html_proofer.run }
       errors = output.split("\n")
       @errors.concat(errors)
 
+      # clean up the file
       FileUtils.rm(output_file)
     end
   end
