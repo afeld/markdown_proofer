@@ -9,8 +9,10 @@ describe MarkdownProofer, vcr: vcr_options do
     it "handles directories" do
       proofer = MarkdownProofer.new(fixture_path)
       files = proofer.files
-      expect(files.size).to eq(2)
-      expect(files.first).to end_with('/spec/fixtures/broken_link.md')
+      expect(files.sort).to eq([
+        fixture_path('broken_link.md'),
+        fixture_path('working_link.md')
+      ])
     end
 
     it "handles files" do
