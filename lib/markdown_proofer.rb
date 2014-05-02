@@ -11,7 +11,8 @@ class MarkdownProofer
 
   def initialize(path)
     @path = path
-    @errors = []
+
+    self.reset_errors
     @pipeline = HTML::Pipeline.new [
       HTML::Pipeline::MarkdownFilter,
       HTML::Pipeline::TableOfContentsFilter
@@ -28,6 +29,8 @@ class MarkdownProofer
   end
 
   def run
+    self.reset_errors
+
     # iterate over files, and generate HTML from Markdown
     self.files.each do |file|
       # convert the Markdown to HTML
@@ -53,6 +56,10 @@ class MarkdownProofer
 
 
   protected
+
+  def reset_errors
+    @errors = []
+  end
 
   # https://github.com/gjtorikian/html-proofer/blob/f16643845ed26c5aaeafc7c6c8d69a00e2acad75/spec/spec_helper.rb#L17
   def capture_stderr(&block)
