@@ -7,24 +7,24 @@ require 'html/pipeline'
 require 'html/proofer'
 
 class MarkdownProofer
-  attr_reader :path, :errors
+  attr_reader :path, :errors, :pipeline
 
   def initialize(path)
     @path = path
     @errors = []
-  end
-
-  def run
-    pipeline = HTML::Pipeline.new [
+    @pipeline = HTML::Pipeline.new [
       HTML::Pipeline::MarkdownFilter,
       HTML::Pipeline::TableOfContentsFilter
     ], gfm: true
+  end
 
+  def run
     # iterate over files, and generate HTML from Markdown
-    Dir.glob(File.join(self.path, '**', '*.md')) do |file|
+    markdown_files_pattern = File.join(self.path, '**', '*.md')
+    Dir.glob(markdown_files_pattern) do |file|
       # convert the Markdown to HTML
       contents = File.read(file)
-      result = pipeline.call(contents)
+      result = self.pipeline.call(contents)
 
       # save the HTML file next to the Markdown one
       output_file = file.sub(/\.md$/, '.html')
