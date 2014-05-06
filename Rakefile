@@ -6,7 +6,7 @@ RSpec::Core::RakeTask.new(:spec)
 
 desc "Run Mardown validation for the repository"
 task :validate_markdown do
-  MarkdownProofer::RakeTask.run('README.md')
+  MarkdownProofer::RakeTask.run(path: 'README.md')
 end
 
 task :default => [:spec, :validate_markdown]
