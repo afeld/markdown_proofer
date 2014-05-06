@@ -10,11 +10,11 @@ require 'html/proofer'
 
 
 class MarkdownProofer
-  attr_reader :path, :exclude, :html_proofer, :errors, :pipeline
+  attr_reader :path, :excludes, :html_proofer, :errors, :pipeline
 
-  def initialize(path: '.', exclude: [], html_proofer: {})
+  def initialize(path: '.', excludes: [], html_proofer: {})
     @path = path
-    @exclude = exclude
+    @excludes = excludes
     @html_proofer = html_proofer
 
     self.reset_errors
@@ -34,7 +34,7 @@ class MarkdownProofer
   end
 
   def included_files
-    self.files - self.exclude
+    self.files - self.excludes
   end
 
   def run

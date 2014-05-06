@@ -27,7 +27,7 @@ describe MarkdownProofer, vcr: vcr_options do
   describe '#included_files' do
     it "ignores the excluded glob" do
       excludes = [fixture_path('broken_link.md')]
-      proofer = MarkdownProofer.new(path: fixture_path, exclude: excludes)
+      proofer = MarkdownProofer.new(path: fixture_path, excludes: excludes)
       files = proofer.included_files
       expect(files.sort).to eq([
         fixture_path('relative_link.md'),
