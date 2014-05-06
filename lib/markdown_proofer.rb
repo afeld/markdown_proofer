@@ -80,7 +80,7 @@ class MarkdownProofer
     rescue RuntimeError
     ensure
       $stderr = original_stderr
-      # $stdout = original_stdout
+      $stdout = original_stdout
     end
     fake_err.string
   end
