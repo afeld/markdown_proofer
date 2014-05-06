@@ -2,7 +2,7 @@
 
 [foo](http://broke.nnsss)
 
-A gem that validates your Markdown files.  It uses [html-proofer](https://github.com/gjtorikian/html-proofer) under the hood to check whether links and images exist.
+A gem that validates your Markdown files.  It uses [HTML::Proofer](https://github.com/gjtorikian/html-proofer) under the hood to check whether links and images exist.
 
 ## Setup
 
@@ -31,7 +31,16 @@ end
 task default: :test
 ```
 
-and if you want to run the validation using [Travis CI](https://travis-ci.org), include
+### Configuration
+
+`MarkdownProofer::RakeTask.run` accepts the following named parameters:
+
+* `path` – The relative path to the file/directory that you want to validate. Defaults to the top-level directory.
+* `html_proofer` – Options passed to HTML::Proofer.  See [the HTML::Proofer documentation](https://github.com/gjtorikian/html-proofer#configuration).
+
+### Travis CI
+
+If you want to run the validation using [Travis CI](https://travis-ci.org), include
 
 ```yaml
 # .travis.yml
@@ -42,7 +51,7 @@ rvm:
 install: bundle install --deployment --path .bundle
 ```
 
-## Running
+## Usage
 
 ```bash
 bundle
