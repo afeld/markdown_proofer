@@ -22,11 +22,12 @@ require 'rubygems'
 require 'bundler'
 Bundler.require(:default)
 
-task :test do
+desc "Run Mardown validation for the repository"
+task :validate_markdown do
   MarkdownProofer::RakeTask.run
 end
 
-task default: :test
+task default: :validate_markdown
 ```
 
 ### Configuration
