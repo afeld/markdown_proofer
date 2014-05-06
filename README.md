@@ -34,7 +34,7 @@ task default: :validate_markdown
 
 `MarkdownProofer::RakeTask.run` accepts the following named parameters:
 
-* `excludes` – An Array of [Regexp](http://www.ruby-doc.org/core-2.1.1/Regexp.html)s.  Any file paths that match will be excluded from validation.  Defaults to excluding test-related files.
+* `excludes` – An Array of regular expressions.  Any file paths that match will be excluded from validation.  Defaults to excluding test-related files.
 * `html_proofer` – Options passed to HTML::Proofer.  See [the HTML::Proofer documentation](https://github.com/gjtorikian/html-proofer#configuration).
 * `path` – The relative path to the file/directory that you want to validate. Defaults to the top-level directory.
 
