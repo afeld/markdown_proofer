@@ -24,6 +24,17 @@ describe MarkdownProofer, vcr: vcr_options do
     end
   end
 
+  describe '#included_files' do
+    it "ignores the excluded glob" do
+      proofer = MarkdownProofer.new(path: fixture_path, excludes: [/broken/])
+      files = proofer.included_files
+      expect(files.sort).to eq([
+        fixture_path('relative_link.md'),
+        fixture_path('working_link.md')
+      ])
+    end
+  end
+
   describe '#run' do
     it "passes options to HTML::Proofer" do
       HTML::Proofer.should_receive(:new).with(anything, ext: 'htm').and_call_original
