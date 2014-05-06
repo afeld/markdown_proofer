@@ -17,9 +17,9 @@ class MarkdownProofer
       proofer = self.create_proofer(*args)
       proofer.run
       if proofer.errors.any?
-        raise "Failed! #{proofer.errors.join("\n")}"
+        raise "FAILED!\n#{proofer.errors.join("\n")}"
       else
-        puts "Success!"
+        puts "SUCCESS!"
       end
     end
     module_function :run
