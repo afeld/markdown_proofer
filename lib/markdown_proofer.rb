@@ -34,7 +34,11 @@ class MarkdownProofer
   end
 
   def included_files
-    self.files - self.excludes
+    self.files.reject do |file|
+      self.excludes.any? do |exclude|
+        file =~ exclude
+      end
+    end
   end
 
   def run
