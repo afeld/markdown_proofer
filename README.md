@@ -4,7 +4,7 @@ A gem that validates your Markdown files.  It uses [HTML::Proofer](https://githu
 
 ## Setup
 
-Create the following files:
+Requires Ruby 2.0+.  Create the following files:
 
 ```ruby
 # Gemfile
