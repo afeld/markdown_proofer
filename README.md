@@ -1,7 +1,5 @@
 # MarkdownProofer
 
-[foo](http://broke.nnsss)
-
 A gem that validates your Markdown files.  It uses [HTML::Proofer](https://github.com/gjtorikian/html-proofer) under the hood to check whether links and images exist.
 
 ## Setup
