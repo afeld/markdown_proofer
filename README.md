@@ -1,4 +1,4 @@
-# MarkdownProofer
+# MarkdownProofer [![Build Status](https://travis-ci.org/afeld/markdown_proofer.svg?branch=master)](https://travis-ci.org/afeld/markdown_proofer)
 
 A gem that validates your Markdown files.  It uses [HTML::Proofer](https://github.com/gjtorikian/html-proofer) under the hood to check whether links and images exist.
 
