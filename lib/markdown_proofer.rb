@@ -3,6 +3,7 @@ require 'bundler'
 Bundler.require(:default)
 
 require 'markdown_proofer/version'
+require 'markdown_proofer/rake_task'
 require 'find'
 require 'html/pipeline'
 require 'html/proofer'
