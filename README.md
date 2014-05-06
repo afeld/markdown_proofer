@@ -1,29 +1,50 @@
 # MarkdownProofer
 
-TODO: Write a gem description
+[foo](http://broke.nnsss)
 
-## Installation
+A gem that validates your Markdown files.  It uses [html-proofer](https://github.com/gjtorikian/html-proofer) under the hood to check whether links and images exist.
 
-Add this line to your application's Gemfile:
+## Setup
 
-    gem 'markdown_proofer'
+Create the following files:
 
-And then execute:
+```ruby
+# Gemfile
 
-    $ bundle
+source 'https://rubygems.org'
 
-Or install it yourself as:
+gem 'markdown_proofer'
+gem 'rake'
+```
 
-    $ gem install markdown_proofer
+```ruby
+# Rakefile
 
-## Usage
+require 'rubygems'
+require 'bundler'
+Bundler.require(:default)
 
-TODO: Write usage instructions here
+task :test do
+  MarkdownProofer::RakeTask.run
+end
 
-## Contributing
+task default: :test
+```
 
-1. Fork it ( https://github.com/[my-github-username]/markdown_proofer/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+and if you want to run the validation using [Travis CI](https://travis-ci.org), include
+
+```yaml
+# .travis.yml
+
+language: ruby
+rvm:
+  - 2.0.0
+install: bundle install --deployment --path .bundle
+```
+
+## Running
+
+```bash
+bundle
+bundle exec rake
+```
