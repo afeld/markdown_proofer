@@ -7,7 +7,7 @@ describe MarkdownProofer, vcr: vcr_options do
 
   describe '#files' do
     it "handles directories" do
-      proofer = MarkdownProofer.new(fixture_path)
+      proofer = MarkdownProofer.new(path: fixture_path)
       files = proofer.files
       expect(files.sort).to eq([
         fixture_path('broken_link.md'),
@@ -17,7 +17,7 @@ describe MarkdownProofer, vcr: vcr_options do
     end
 
     it "handles files" do
-      proofer = MarkdownProofer.new(fixture_path('broken_link.md'))
+      proofer = MarkdownProofer.new(path: fixture_path('broken_link.md'))
       files = proofer.files
       expect(files.size).to eq(1)
       expect(files.first).to end_with('/spec/fixtures/broken_link.md')
@@ -29,34 +29,34 @@ describe MarkdownProofer, vcr: vcr_options do
       HTML::Proofer.should_receive(:new).with(anything, ext: 'htm').and_call_original
 
       path = fixture_path('working_link.md')
-      proofer = MarkdownProofer.new(path, html_proofer: {ext: 'htm'})
+      proofer = MarkdownProofer.new(path: path, html_proofer: {ext: 'htm'})
       proofer.run
     end
 
     it "works for relative links" do
-      proofer = MarkdownProofer.new(fixture_path('relative_link.md'))
+      proofer = MarkdownProofer.new(path: fixture_path('relative_link.md'))
       expect(proofer.run).to be_true
     end
 
     it "complains for files with broken links" do
-      proofer = MarkdownProofer.new(fixture_path)
+      proofer = MarkdownProofer.new(path: fixture_path)
       proofer.run
       expect(proofer.errors.size).to eq(1)
       expect(proofer.errors.first).to include("External link")
     end
 
     it "returns true for no broken links" do
-      proofer = MarkdownProofer.new(fixture_path('working_link.md'))
+      proofer = MarkdownProofer.new(path: fixture_path('working_link.md'))
       expect(proofer.run).to be_true
     end
 
     it "returns false for broken links" do
-      proofer = MarkdownProofer.new(fixture_path)
+      proofer = MarkdownProofer.new(path: fixture_path)
       expect(proofer.run).to be_false
     end
 
     it "can be executed multiple times" do
-      proofer = MarkdownProofer.new(fixture_path)
+      proofer = MarkdownProofer.new(path: fixture_path)
       2.times do
         proofer.run
         expect(proofer.errors.size).to eq(1)

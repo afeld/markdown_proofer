@@ -12,7 +12,7 @@ require 'html/proofer'
 class MarkdownProofer
   attr_reader :path, :html_proofer, :errors, :pipeline
 
-  def initialize(path, html_proofer: {})
+  def initialize(path: '.', html_proofer: {})
     @path = path
     @html_proofer = html_proofer
 
