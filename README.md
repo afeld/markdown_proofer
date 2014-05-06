@@ -33,8 +33,9 @@ task default: :test
 
 `MarkdownProofer::RakeTask.run` accepts the following named parameters:
 
-* `path` – The relative path to the file/directory that you want to validate. Defaults to the top-level directory.
+* `exclude` – An Array of file paths to exclude from validation.
 * `html_proofer` – Options passed to HTML::Proofer.  See [the HTML::Proofer documentation](https://github.com/gjtorikian/html-proofer#configuration).
+* `path` – The relative path to the file/directory that you want to validate. Defaults to the top-level directory.
 
 ### Travis CI
 
