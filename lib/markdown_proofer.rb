@@ -59,8 +59,10 @@ class MarkdownProofer
 
         # do validation on the file
         html_proofer = HTML::Proofer.new(output_file, self.html_proofer)
-        output = self.capture_stderr { html_proofer.run }
-        errors = output.split("\n")
+        self.capture_stderr { html_proofer.run }
+
+        # TODO add getter in HTML::Proofer
+        errors = html_proofer.instance_variable_get(:@failed_tests)
         self.errors.concat(errors)
       ensure
         # clean up the file
