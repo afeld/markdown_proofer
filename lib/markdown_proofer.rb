@@ -59,12 +59,10 @@ class MarkdownProofer
 
         # do validation on the file
         html_proofer = HTML::Proofer.new(output_file, self.html_proofer)
-        output = self.capture_stderr { html_proofer.run }
+        self.capture_stderr { html_proofer.run }
 
-        # remove color decorations
-        # http://stackoverflow.com/a/16034328/358804
-        errors = output.gsub(/\e\[(\d+)(;\d+)*m/, '').split(/\n{2,}/)
-
+        # TODO add getter in HTML::Proofer
+        errors = html_proofer.instance_variable_get(:@failed_tests)
         self.errors.concat(errors)
       ensure
         # clean up the file
