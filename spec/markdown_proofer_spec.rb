@@ -46,7 +46,7 @@ describe MarkdownProofer, vcr: vcr_options do
 
     it "works for relative links" do
       proofer = MarkdownProofer.new(path: fixture_path('relative_link.md'))
-      expect(proofer.run).to be_true
+      expect(proofer.run).to eq(true)
     end
 
     it "complains for files with broken links" do
@@ -58,12 +58,12 @@ describe MarkdownProofer, vcr: vcr_options do
 
     it "returns true for no broken links" do
       proofer = MarkdownProofer.new(path: fixture_path('working_link.md'))
-      expect(proofer.run).to be_true
+      expect(proofer.run).to eq(true)
     end
 
     it "returns false for broken links" do
       proofer = MarkdownProofer.new(path: fixture_path)
-      expect(proofer.run).to be_false
+      expect(proofer.run).to eq(false)
     end
 
     it "can be executed multiple times" do
