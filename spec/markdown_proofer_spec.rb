@@ -37,7 +37,7 @@ describe MarkdownProofer, vcr: vcr_options do
 
   describe '#run' do
     it "passes options to HTML::Proofer" do
-      HTML::Proofer.should_receive(:new).with(anything, ext: 'htm').and_call_original
+      expect(HTML::Proofer).to receive(:new).with(anything, ext: 'htm').and_call_original
 
       path = fixture_path('working_link.md')
       proofer = MarkdownProofer.new(path: path, html_proofer: {ext: 'htm'})
